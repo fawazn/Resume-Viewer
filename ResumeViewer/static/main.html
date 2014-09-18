@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+
+<head>
+    <script data-require="angular.js@1.1.5" data-semver="1.1.5" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.js"></script>
+    <script src="//code.angularjs.org/1.2.16/angular-animate.js"></script>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static "main.css" %}">
+    <script src="{% static "app.js" %}"></script>
+</head>
+
+<body ng-controller="MainCtrl">
+<div>
+    <div class=""><button ng-click="add()" style="color:white">ADD JOB</button><button style="color:white" id="savebtn" ng-click="save()">SAVE</button></div>
+    <div class="roombelow"></div>
+    <div>
+        <div class="cardpadding" ng-repeat="item in items | orderBy: 'date_start':true">
+            <div class="quart">
+                <div class="smallfont">Title</div>
+                <div class="bigfont"> <input ng-model="item.title"></div>
+            </div>
+            <div class="quart">
+                <div class="smallfont">Company</div>
+                <div class="bigfont"> <input ng-model="item.company"></div>
+            </div>
+            <div class="quart">
+                <div class="smallfont">Location</div>
+                <div class="bigfont"> <input ng-model="item.location"></div>
+            </div>
+            <div class="quart">
+                <div class="smallfont">Start Date</div>
+                <div class= "bigfont"><input type="date" ng-model="item.date_start"></div>
+            </div>
+            <div class="quart">
+                <div class="smallfont">End Date</div>
+                <div class= "bigfont"><input type="date" ng-model="item.date_end"></div>
+            </div>
+            <div class="container"><a ng-click="removejob($index)" class="circle">&#10006;</a></div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

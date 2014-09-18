@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume Viewer</title>
+<style>
+    @import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400);
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        flex-direaction: column;
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        align-items: center;
+        margin: 0;
+        min-height: 100vh;
+        background: #3498DB;
+        font-family: "Open Sans";
+    }
+
+    .signin {
+        padding: 1em;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 1em;
+        text-align: center;
+        background: white;
+        color: rgba(0, 0, 0, 0.75);
+        width: 300px;
+    }
+
+    h1, button {
+        font-weight: 300;
+        text-transform: uppercase;
+    }
+    input, button {
+        display: block;
+        width: 100%;
+
+        text-align: center;
+        font-size: 1.1em;
+        padding: 1ex;
+        border: 2px solid #ECF0F1;
+        transition: border ease 500ms;
+        border-radius: 1ex;
+        font-family: "Open Sans";
+        background: #ECF0F1;
+        color: #181818;
+    }
+    &:focus {
+        outline: none;
+        border: 2px solid #3498DB;
+    }
+
+
+
+        input[type=submit] {
+            color: white;
+            border: 2px solid #3498DB;
+            background: #3498DB;
+        }
+
+</style>
+</head>
+
+<body>
+<h1>Resume Viewer</h1>
+{% if registered %}
+    <strong>Thank you for registering!</strong>
+    <a href="/cv/">Go to Resume Viewer.</a><br />
+{% else %}
+<div class="signin">
+    <form id="user_form" method="post" action="/register/"
+          enctype="multipart/form-data">
+        <h1> Register here</h1>
+        {% csrf_token %}
+        {{ user_form.as_p }}
+{#        {{ profile_form.as_p }}#}
+        <input type="submit" name="submit" value="Register" />
+    </form>
+    </div>
+{% endif %}
+<br>
+<div class="signin">
+    <h1>Or Sign in if you have an account</h1>
+    <form id="login_form" method="post" action="/login/">
+        {% csrf_token %}
+        <input type="text" placeholder="username" name="username" value=""  />
+        <br />
+        <input type="password" placeholder="password" name="password" value="" />
+        <br />
+        <input type="submit" value="submit" />
+</form>
+</div>
+</body>
+</html>
